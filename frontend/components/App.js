@@ -38,14 +38,19 @@ export default class App extends React.Component {
    
     return (
       <div>
-       <h2>Todo App</h2>
+       <h2>Todos:</h2>
        <ul>
          {
            todos.map((todo) => {
-             return <li className='td' key={todo.id}>{todo.name}</li>
+             return <li className='td' key={todo.id}>{todo.name} {todo.completed?<span> ✔ </span> : <span> ✖ </span>}</li>
            })
          }
        </ul>
+       <form>
+         <input type="text" id="todo" placeholder="Add Todo"/>
+         <button>Add</button>
+       </form>
+       <button>Hide Completed</button>
       </div>
     )
   }
