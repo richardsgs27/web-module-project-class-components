@@ -1,5 +1,6 @@
 import React from 'react'
 import TodoList from './TodoList'
+import Form from './Form'
 
 const todos = [
   {
@@ -27,20 +28,28 @@ const initialState = {
   }
 }
 
-
-
-
-
 export default class App extends React.Component {
   state = initialState
 
+  handleAdd = (name) => {
+    const newTodo = {
+  name: name,
+  id: Date.now(),
+  completed: false
+}
+    this.setState({
+      ...this.state,
+      todos: [...this.state.todos, newTodo]
+    })
+  }  
+  
   destroy = id => {
     this.setState({ ...this.state, todos: this.state.todos.filter(todo => {
       return (todo.completed === false);
     })})
   }
 
-  handleToggle = (clickedId) => {
+  toggle = (clickedId) => {
     this.setState({
       ...this.state, todos: this.state.todos.map(todo => {
         if (todo.id === clickedId) {
@@ -63,11 +72,9 @@ export default class App extends React.Component {
     return (
       <div>
        <h2>Todos:</h2>
-       <TodoList handleToggle={this.handleToggle} todos={todos}/>
-       <form>
-         <input type="text" id="todo" placeholder="Add Todo"/>
-         <button >Add</button>
-       </form>
+       <TodoList toggle={this.toggle} todos={todos}/>
+       <Form handleAdd={this.handleAdd}/>
+       
        <button onClick={this.destroy}>Hide Completed</button>
       </div>
     )

@@ -3,7 +3,7 @@ import React from 'react'
 
 export default class Todo extends React.Component {
   handleClick = () => {
-    this.props.handleToggle(this.props.todo.id)
+    this.props.toggle(this.props.todo.id)
   }
 
   render() {
