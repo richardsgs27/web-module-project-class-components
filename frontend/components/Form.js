@@ -22,9 +22,9 @@ export default class Form extends React.Component {
 
   render() {
     return (
-      <form onClick={this.submit}>
+      <form>
          <input onChange={this.change}/>
-         <button >Add</button>
+         <button onClick={this.submit} >Add</button>
        </form>
     )
   }

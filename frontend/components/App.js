@@ -32,13 +32,8 @@ export default class App extends React.Component {
   state = initialState
 
   handleAdd = (name) => {
-    const newTodo = {
-  name: name,
-  id: Date.now(),
-  completed: false
-}
-    this.setState({
-      ...this.state,
+    const newTodo = {name: name, id: Date.now(), completed: false}
+    this.setState({ ...this.state, 
       todos: [...this.state.todos, newTodo]
     })
   }  
@@ -54,8 +49,7 @@ export default class App extends React.Component {
       ...this.state, todos: this.state.todos.map(todo => {
         if (todo.id === clickedId) {
           return {
-            ...todo,
-            completed: !todo.completed
+            ...todo,completed: !todo.completed
           }
         }
         return todo;
@@ -75,7 +69,7 @@ export default class App extends React.Component {
        <TodoList toggle={this.toggle} todos={todos}/>
        <Form handleAdd={this.handleAdd}/>
        
-       <button onClick={this.destroy}>Hide Completed</button>
+       <button onClick={this.destroy}>Clear</button>
       </div>
     )
   }
