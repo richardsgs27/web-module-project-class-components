@@ -23,7 +23,7 @@ const todos = [
 const initialState = {
   todos,
   form: {
-    name: '',
+   name: '',
     completed: false
   }
 }
@@ -32,9 +32,10 @@ export default class App extends React.Component {
   state = initialState
 
   handleAdd = (name) => {
+    const {todos} = this.state
     const newTodo = {name: name, id: Date.now(), completed: false}
     this.setState({ ...this.state, 
-      todos: [...this.state.todos, newTodo]
+      todos: [...todos, newTodo]
     })
   }  
   
