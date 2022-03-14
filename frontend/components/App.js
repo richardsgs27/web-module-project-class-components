@@ -1,4 +1,5 @@
 import React from 'react'
+import TodoList from './TodoList'
 
 const todos = [
   {
@@ -19,7 +20,6 @@ const todos = [
 ]
 
 const initialState = {
-  errorMessage: '',
   todos,
   form: {
     name: '',
@@ -27,8 +27,32 @@ const initialState = {
   }
 }
 
+
+
+
+
 export default class App extends React.Component {
   state = initialState
+
+  destroy = id => {
+    this.setState({ ...this.state, todos: this.state.todos.filter(todo => {
+      return (todo.completed === false);
+    })})
+  }
+
+  handleToggle = (clickedId) => {
+    this.setState({
+      ...this.state, todos: this.state.todos.map(todo => {
+        if (todo.id === clickedId) {
+          return {
+            ...todo,
+            completed: !todo.completed
+          }
+        }
+        return todo;
+      })
+    })
+  }
 
   render() {
     console.log('props are', this.props)
@@ -39,18 +63,12 @@ export default class App extends React.Component {
     return (
       <div>
        <h2>Todos:</h2>
-       <ul>
-         {
-           todos.map((todo) => {
-             return <li className='td' key={todo.id}>{todo.name} {todo.completed?<span> ✔ </span> : <span> ✖ </span>}</li>
-           })
-         }
-       </ul>
+       <TodoList handleToggle={this.handleToggle} todos={todos}/>
        <form>
          <input type="text" id="todo" placeholder="Add Todo"/>
-         <button>Add</button>
+         <button >Add</button>
        </form>
-       <button>Hide Completed</button>
+       <button onClick={this.destroy}>Hide Completed</button>
       </div>
     )
   }
